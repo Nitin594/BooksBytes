@@ -7,21 +7,18 @@ import HomePage from "./components/common/Home";
 import BrowseBooksPage from "./components/books/BrowseBooks";
 import PageNotFound from "./components/common/NotFoundPage";
 import AdminLoginPage from "./components/Auth/Login";
+import AdminDashboard from "./components/admin/Dashboard";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        {/* Home Page */}
         <Route path="/" element={<HomePage />} />
-
-        {/* Browse Page */}
         <Route path="/browse" element={<BrowseBooksPage />} />
-        <Route path="/admin-login" element={<AdminLoginPage/>} />
-
-        {/* Catch-all for undefined routes */}
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="/admin-login" element={<AdminLoginPage />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </>
