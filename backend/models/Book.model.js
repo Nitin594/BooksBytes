@@ -25,19 +25,19 @@ const bookSchema = new mongoose.Schema(
     genre: {
       type: String,
       required: [true, 'A book must have a genre.'],
-      enum: [
-        'Fiction',
-        'Non-Fiction',
-        'Science Fiction',
-        'Fantasy',
-        'Biography',
-        'Mystery',
-        'Romance',
-        'Self-Help',
-        'History',
-        'Children',
-        'horror'
-      ],
+      // enum: [
+      //   'Fiction',
+      //   'Non-Fiction',
+      //   'Science Fiction',
+      //   'Fantasy',
+      //   'Biography',
+      //   'Mystery',
+      //   'Romance',
+      //   'Self-Help',
+      //   'History',
+      //   'Children',
+      //   'horror'
+      // ],
     },
     coverImageUrl: {
       type: String,

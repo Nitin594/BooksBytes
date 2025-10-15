@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // 1. Import useAuth
+import { useAuth } from '../../context/AuthContext'; // Import the auth context
 
 const AdminLoginPage = () => {
-    const [username, setUsername] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const auth = useAuth(); // 2. Get the auth context
+    const auth = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -17,12 +17,9 @@ const AdminLoginPage = () => {
         setIsLoading(true);
 
         try {
-            // 3. Call the login function from the context
-            await auth.login(username, password);
-            // 4. Redirect on success
-            navigate('/dashboard'); // Redirect to your admin dashboard
+            await auth.login(email, password);
+            navigate('/admin-dashboard');
         } catch (err) {
-            // 5. Handle errors from the API call
             const message = err.response?.data?.message || 'Login failed. Please try again.';
             setError(message);
         } finally {
@@ -45,18 +42,18 @@ const AdminLoginPage = () => {
                 <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                                Username
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                Email
                             </label>
                             <div className="mt-1">
                                 <input
-                                    id="username"
-                                    name="username"
-                                    type="text"
-                                    autoComplete="username"
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="email"
                                     required
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
@@ -81,7 +78,10 @@ const AdminLoginPage = () => {
                         </div>
 
                         {error && (
-                            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <div
+                                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                role="alert"
+                            >
                                 <span className="block sm:inline">{error}</span>
                             </div>
                         )}
@@ -96,6 +96,7 @@ const AdminLoginPage = () => {
                             </button>
                         </div>
                     </form>
+
                     <div className="mt-6">
                         <div className="relative">
                             <div className="absolute inset-0 flex items-center">
@@ -117,5 +118,3 @@ const AdminLoginPage = () => {
 };
 
 export default AdminLoginPage;
-
-

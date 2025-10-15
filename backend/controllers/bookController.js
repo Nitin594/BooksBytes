@@ -42,3 +42,25 @@ export const uploadBook = async (req, res) => {
       .json({ message: "Error in Book upload", error: error.message });
   }
 };
+
+export const getAllBooks = async (req, res) => {
+  try {
+    const books = await Book.find({}).sort({createdAt:-1});
+    res.status(200).json(books);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error Fetching Books", error: error.message });
+  }
+};
+
+export const lastFourBooks = async (req, res) => {
+  try {
+    const books = await Book.find({}).sort({ createdAt: -1 }).limit(4);
+    res.status(200).json(books);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error in loading latest books", error: error.message });
+  }
+};

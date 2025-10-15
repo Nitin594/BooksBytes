@@ -1,26 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
 export default function HomePage() {
   // Placeholder book data
-  const newArrivals = [
-    { id: 1, title: "The Midnight Library", author: "Matt Haig", image: "📚" },
-    { id: 2, title: "Atomic Habits", author: "James Clear", image: "📖" },
-    { id: 3, title: "Project Hail Mary", author: "Andy Weir", image: "📕" },
-    { id: 4, title: "The Seven Husbands", author: "Taylor Jenkins Reid", image: "📗" }
-  ];
+  // const newArrivals = [
+  //   { id: 1, title: "The Midnight Library", author: "Matt Haig", image: "📚" },
+  //   { id: 2, title: "Atomic Habits", author: "James Clear", image: "📖" },
+  //   { id: 3, title: "Project Hail Mary", author: "Andy Weir", image: "📕" },
+  //   { id: 4, title: "The Seven Husbands", author: "Taylor Jenkins Reid", image: "📗" }
+  // ];
 
+  const [newArrivals, setNewArrivals] = useState([]);
   const genres = [
     "Science Fiction",
     "Mystery",
     "Fantasy",
     "Self-Help",
     "Romance",
-    "Biography"
+    "Biography",
+    "...and many more",
   ];
 
+  const API_URL = "http://localhost:5000/api";
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch(`${API_URL}/lastFourBooks`);
+        if (!response.ok) {
+          throw new Error("Data could not be fetched");
+        }
+        const data = await response.json();
+        setNewArrivals(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBooks();
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50">
-      
       {/* 1. Hero Section */}
       <section className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white py-24 px-4">
         <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -29,7 +47,8 @@ export default function HomePage() {
             Your Next Chapter Awaits
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-100">
-            A curated collection of bestsellers and hidden gems, delivered right to your door.
+            A curated collection of bestsellers and hidden gems, delivered right
+            to your door.
           </p>
           <a
             href="/browse"
@@ -49,11 +68,20 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {newArrivals.map((book) => (
               <div
-                key={book.id}
+                key={book._id}
                 className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-200"
               >
-                <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg h-64 flex items-center justify-center mb-4">
-                  <span className="text-6xl">{book.image}</span>
+                <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg h-74 flex items-center justify-center mb-4">
+                    {book.coverImageUrl ? (
+                      <img
+                        src={book.coverImageUrl}
+                        alt={book.title}
+                        className="object-cover h-full w-full rounded-lg"
+                      />
+                    ) : (
+                      <span className="text-6xl">📚</span> // fallback emoji if no image
+                    )}
+                  
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {book.title}
@@ -69,18 +97,16 @@ export default function HomePage() {
       <section className="py-16 px-4 bg-gray-100">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
-            Explore by Genre
+            Explore all Genre
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
             {genres.map((genre, index) => (
               <a
                 key={index}
                 href="/browse"
                 className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl hover:bg-indigo-50 transition-all duration-200 transform hover:-translate-y-1"
               >
-                <p className="text-lg font-semibold text-gray-800">
-                  {genre}
-                </p>
+                <p className="text-lg font-semibold text-gray-800">{genre}</p>
               </a>
             ))}
           </div>
@@ -94,7 +120,6 @@ export default function HomePage() {
             Why BookBytes?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            
             {/* Column 1: Easy Ordering */}
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
@@ -115,9 +140,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold mb-3 text-gray-800">
                 Easy Ordering
               </h3>
-              <p className="text-gray-600">
-                Order in seconds via WhatsApp.
-              </p>
+              <p className="text-gray-600">Order in seconds via WhatsApp.</p>
             </div>
 
             {/* Column 2: Curated Collection */}
@@ -140,9 +163,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold mb-3 text-gray-800">
                 Curated Collection
               </h3>
-              <p className="text-gray-600">
-                Hand-picked books you'll love.
-              </p>
+              <p className="text-gray-600">Hand-picked books you'll love.</p>
             </div>
 
             {/* Column 3: Support Local */}
