@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
+import API_URL from "../api/api.js";
 
 const AuthContext = createContext(null);
 
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     // In a real app, use the full URL from an environment variable
-    const API_URL = "http://localhost:5000/api/auth/login";
+    // const API_URL = "http://localhost:5000/api/auth/login";
 
     const response = await axios.post(API_URL, { email, password });
 
