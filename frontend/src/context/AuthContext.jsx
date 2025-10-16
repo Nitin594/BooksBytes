@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     // In a real app, use the full URL from an environment variable
     // const API_URL = "http://localhost:5000/api/auth/login";
 
-    const response = await axios.post(API_URL, { email, password });
+    const response = await axios.post(`${API_URL}/auth/login`, { email, password });
 
     // expected backend response: { message, token, user }
     if (response?.data?.token && response?.data?.user) {
