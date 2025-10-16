@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import API_URL from "../../api/api.js";
 
 // --- Reusable BookCard Component ---
 const BookCard = ({ title, author, coverImageUrl, genre }) => (
@@ -35,7 +36,7 @@ const BrowseBooksPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-  const API_URL = "http://localhost:5000/api";
+  // const API_URL = "http://localhost:5000/api";
 
   // Fetch books
   useEffect(() => {

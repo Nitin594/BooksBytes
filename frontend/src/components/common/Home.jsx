@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import API_URL from "../../api/api.js";
 
 export default function HomePage() {
   // Placeholder book data
@@ -20,7 +21,7 @@ export default function HomePage() {
     "...and many more",
   ];
 
-  const API_URL = "http://localhost:5000/api";
+  // const API_URL = "http://localhost:5000/api";
 
   useEffect(() => {
     const fetchBooks = async () => {
