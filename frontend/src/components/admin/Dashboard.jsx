@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import BookUploadForm from './Upload';
 import API_URL from '../../api/api.js';
+import { Link } from 'react-router-dom';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -87,12 +88,12 @@ export default function AdminDashboard() {
               <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
               <p className="text-gray-600 mt-1">Manage your BookBytes collection</p>
             </div>
-            <a
+            <Link
               href="/"
               className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
             >
               View Site
-            </a>
+            </Link>
           </div>
         </div>
       </div>

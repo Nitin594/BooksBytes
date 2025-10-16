@@ -29,19 +29,19 @@ export default function PageNotFound() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="w-full sm:w-auto bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg"
           >
             Go to Homepage
-          </a>
+          </Link>
           
-          <a
-            href="/browse"
+          <Link
+            to="/browse"
             className="w-full sm:w-auto bg-white text-indigo-600 border-2 border-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors shadow-md hover:shadow-lg"
           >
             Browse Books
-          </a>
+          </Link>
         </div>
 
         {/* Additional Help */}
@@ -50,17 +50,17 @@ export default function PageNotFound() {
             Need help finding something?
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
-            <a href="/" className="text-indigo-600 hover:text-indigo-800 hover:underline">
+            <Link to="/" className="text-indigo-600 hover:text-indigo-800 hover:underline">
               Home
-            </a>
+            </Link>
             <span className="text-gray-400">•</span>
-            <a href="/browse" className="text-indigo-600 hover:text-indigo-800 hover:underline">
+            <Link to="/browse" className="text-indigo-600 hover:text-indigo-800 hover:underline">
               Browse Books
-            </a>
+            </Link>
             <span className="text-gray-400">•</span>
-            <a href="/admin" className="text-indigo-600 hover:text-indigo-800 hover:underline">
+            <Link to="/admin" className="text-indigo-600 hover:text-indigo-800 hover:underline">
               Admin Login
-            </a>
+            </Link>
           </div>
         </div>
 
