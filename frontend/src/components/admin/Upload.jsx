@@ -16,16 +16,15 @@ export default function BookUploadForm() {
   // Placeholder genres - in production, fetch these from your API
   const genres = [
     { id: "1", name: "Science Fiction" },
-    { id: "2", name: "Mystery" },
-    { id: "3", name: "Fantasy" },
-    { id: "4", name: "Self-Help" },
+    { id: "2", name: "Thriller & Mystery" },
+    { id: "3", name: "Philosophy" },
+    { id: "4", name: "Self-Help " },
     { id: "5", name: "Romance" },
     { id: "6", name: "Biography" },
     { id: "7", name: "Horror" },
-    { id: "8", name: "Fiction" },
-    { id: "9", name: "Non-Fiction" },
-    { id: "10", name: "History" },
-    { id: "11", name: "children" },
+    { id: "8", name: "Fiction & Fantasy" },
+    { id: "9", name: "History" },
+    { id: "10", name: "Hindi Literature" }, 
   ];
 
   const handleChange = (e) => {

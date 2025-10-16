@@ -45,7 +45,7 @@ export const uploadBook = async (req, res) => {
 
 export const getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find({}).sort({createdAt:-1});
+    const books = await Book.find({}).sort({ createdAt: -1 });
     res.status(200).json(books);
   } catch (error) {
     res
@@ -62,5 +62,26 @@ export const lastFourBooks = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error in loading latest books", error: error.message });
+  }
+};
+
+export const deleteBook = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedBook = await Book.findByIdAndDelete(id);
+    if (!deletedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(200).json({
+      message: "Book deleted successfully",
+      deletedBook,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to delete book",
+      error: error.message,
+    });
   }
 };
