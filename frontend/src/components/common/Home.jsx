@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API_URL from "../../api/api.js";
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
   // Placeholder book data
@@ -51,12 +52,12 @@ export default function HomePage() {
             A curated collection of bestsellers and hidden gems, delivered right
             to your door.
           </p>
-          <a
+          <Link
             href="/browse"
             className="inline-block bg-white text-indigo-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
           >
             Browse All Books
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -102,13 +103,13 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
             {genres.map((genre, index) => (
-              <a
+              <Link
                 key={index}
                 href="/browse"
                 className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl hover:bg-indigo-50 transition-all duration-200 transform hover:-translate-y-1"
               >
                 <p className="text-lg font-semibold text-gray-800">{genre}</p>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -201,12 +202,12 @@ export default function HomePage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
             Ready to Find Your Next Read?
           </h2>
-          <a
+          <Link
             href="/browse"
             className="inline-block bg-white text-indigo-600 px-10 py-5 rounded-lg text-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
           >
             Explore the Full Collection
-          </a>
+          </Link>
         </div>
       </section>
     </div>
