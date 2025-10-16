@@ -53,7 +53,7 @@ export default function HomePage() {
             to your door.
           </p>
           <Link
-            href="/browse"
+            to="/browse"
             className="inline-block bg-white text-indigo-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
           >
             Browse All Books
@@ -105,7 +105,7 @@ export default function HomePage() {
             {genres.map((genre, index) => (
               <Link
                 key={index}
-                href="/browse"
+                to="/browse"
                 className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl hover:bg-indigo-50 transition-all duration-200 transform hover:-translate-y-1"
               >
                 <p className="text-lg font-semibold text-gray-800">{genre}</p>
@@ -203,7 +203,7 @@ export default function HomePage() {
             Ready to Find Your Next Read?
           </h2>
           <Link
-            href="/browse"
+            to="/browse"
             className="inline-block bg-white text-indigo-600 px-10 py-5 rounded-lg text-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
           >
             Explore the Full Collection
