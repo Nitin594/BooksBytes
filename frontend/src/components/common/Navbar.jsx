@@ -26,7 +26,21 @@ export default function Navbar() {
             className="flex items-center space-x-2 text-white hover:text-gray-200 transition-colors"
           >
             <span className="text-2xl h-8 w-8">
-              <img src="/bbLogo.png" alt="BookBytes logo" className="h-8 w-8 object-contain" />
+              <img
+                src="/bbLogo.png"
+                alt="BookBytes logo"
+                className="h-8 w-8 object-contain"
+                onError={(e) => {
+                  // If the public file isn't available in production, fall back to an inline SVG
+                  console.warn('bbLogo.png not found, using inline fallback');
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+  <path d="M12 6s-2-2-4-2-5 2-5 2v14s3-2 5-2 4 2 4 2c1.333-1.333 2.667-2 4-2 1.333 0 3 .667 5 2V6c-2-1.333-3.667-2-5-2-1.333 0-2.667.667-4 2z"/>
+  <path d="M12 6v14" stroke-linecap="round"/>
+</svg>`);
+                }}
+              />
             </span>
             <span className="text-xl font-bold mx-0">BooksByte</span>
           </Link>
