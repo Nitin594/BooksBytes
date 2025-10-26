@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
       }
       // if token exists, set default axios Authorization header
       if (storedToken) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${storedToken}`;
       }
     } catch (error) {
       console.error("Failed to parse user from localStorage", error);
@@ -34,7 +36,10 @@ export const AuthProvider = ({ children }) => {
     // In a real app, use the full URL from an environment variable
     // const API_URL = "http://localhost:5000/api/auth/login";
 
-    const response = await axios.post(`${API_URL}/auth/login`, { email, password });
+    const response = await axios.post(`${API_URL}/auth/login`, {
+      email,
+      password,
+    });
 
     // expected backend response: { message, token, user }
     if (response?.data?.token && response?.data?.user) {

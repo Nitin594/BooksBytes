@@ -85,7 +85,7 @@ const BrowseBooksPage = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 font-serif italic">
             Browse Our Collection
           </h1>
           <p className="mt-4 text-lg text-gray-600">
@@ -109,7 +109,7 @@ const BrowseBooksPage = () => {
         {/* Books grid */}
         {currentBooks.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {currentBooks.map((book) => (
                 <BookCard key={book.id} {...book} />
               ))}

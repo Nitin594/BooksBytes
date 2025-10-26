@@ -25,8 +25,8 @@ export default function Navbar() {
             to="/"
             className="flex items-center space-x-2 text-white hover:text-gray-200 transition-colors"
           >
-            <span className="text-2xl">📚</span>
-            <span className="text-xl font-bold">BooksByte</span>
+            <span className="text-2xl h-8 w-8"><img src='../././public/bbLogo.png'/></span>
+            <span className="text-xl font-bold mx-0">BooksByte</span>
           </Link>
 
           {/* Desktop Navigation */}

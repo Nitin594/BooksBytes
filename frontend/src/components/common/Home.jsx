@@ -45,7 +45,7 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white py-24 px-4">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif italic">
             Your Next Chapter Awaits
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-100">
@@ -67,7 +67,7 @@ export default function HomePage() {
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
             New Arrivals
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {newArrivals.map((book) => (
               <div
                 key={book._id}
