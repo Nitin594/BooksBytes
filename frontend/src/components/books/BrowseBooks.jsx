@@ -16,7 +16,7 @@ const BookCard = ({ title, author, coverImageUrl, genre }) => (
       <p className="text-sm text-gray-600 mb-4">by {author}</p>
       <div className="mt-auto">
         <Link
-          to="https://wa.me/qr/TBLKE2A4ZHSLB1"
+          to="https://wa.me/message/OSRBJVHRXREID1"
           className="w-full text-center bg-slate-800 text-white font-bold py-2 px-4 rounded-md hover:bg-slate-900 transition-colors duration-300 block"
         >
           Rent Now

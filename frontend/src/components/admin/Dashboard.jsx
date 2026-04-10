@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import BookUploadForm from './Upload';
-import API_URL from '../../api/api.js';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import BookUploadForm from "./Upload";
+import API_URL from "../../api/api.js";
+import { Link } from "react-router-dom";
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState("overview");
+  const [searchTerm, setSearchTerm] = useState("");
   const [allBooks, setAllBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
 
@@ -13,9 +13,9 @@ export default function AdminDashboard() {
 
   const stats = {
     totalBooks: allBooks.length,
-    availableBooks: allBooks.filter(b => b.isAvailable).length,
-    unavailableBooks: allBooks.filter(b => !b.isAvailable).length,
-    totalGenres: new Set(allBooks.map(b => b.genre)).size
+    availableBooks: allBooks.filter((b) => b.isAvailable).length,
+    unavailableBooks: allBooks.filter((b) => !b.isAvailable).length,
+    totalGenres: new Set(allBooks.map((b) => b.genre)).size,
   };
 
   // Fetch books
@@ -39,25 +39,26 @@ export default function AdminDashboard() {
     if (!searchTerm.trim()) {
       setFilteredBooks(allBooks);
     } else {
-      const filtered = allBooks.filter(book =>
-        book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.author.toLowerCase().includes(searchTerm.toLowerCase())
+      const filtered = allBooks.filter(
+        (book) =>
+          book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.author.toLowerCase().includes(searchTerm.toLowerCase()),
       );
       setFilteredBooks(filtered);
     }
   }, [searchTerm, allBooks]);
 
   const handleDeleteBook = async (id) => {
-    if (window.confirm('Are you sure you want to delete this book?')) {
+    if (window.confirm("Are you sure you want to delete this book?")) {
       try {
         const response = await fetch(`${API_URL}/deleteBook/${id}`, {
-          method: 'DELETE',
+          method: "DELETE",
         });
-        if (!response.ok) throw new Error('Failed to delete book');
-        setAllBooks(prev => prev.filter(book => book._id !== id));
+        if (!response.ok) throw new Error("Failed to delete book");
+        setAllBooks((prev) => prev.filter((book) => book._id !== id));
       } catch (err) {
         console.error(err);
-        alert('Failed to delete the book.');
+        alert("Failed to delete the book.");
       }
     }
   };
@@ -65,16 +66,16 @@ export default function AdminDashboard() {
   const handleToggleAvailability = async (id) => {
     try {
       const response = await fetch(`${API_URL}/toggleAvailability/${id}`, {
-        method: 'PUT',
+        method: "PUT",
       });
-      if (!response.ok) throw new Error('Failed to update availability');
+      if (!response.ok) throw new Error("Failed to update availability");
       const updatedBook = await response.json();
-      setAllBooks(prev =>
-        prev.map(book => (book._id === id ? updatedBook : book))
+      setAllBooks((prev) =>
+        prev.map((book) => (book._id === id ? updatedBook : book)),
       );
     } catch (err) {
       console.error(err);
-      alert('Failed to toggle availability.');
+      alert("Failed to toggle availability.");
     }
   };
 
@@ -85,8 +86,12 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-              <p className="text-gray-600 mt-1">Manage your BookBytes collection</p>
+              <h1 className="text-3xl font-bold text-gray-900">
+                Admin Dashboard
+              </h1>
+              <p className="text-gray-600 mt-1">
+                Manage your BookBytes collection
+              </p>
             </div>
             <Link
               href="/"
@@ -102,16 +107,24 @@ export default function AdminDashboard() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {[
-            { label: 'Total Books', value: stats.totalBooks, color: 'indigo' },
-            { label: 'Available', value: stats.availableBooks, color: 'green' },
-            { label: 'Unavailable', value: stats.unavailableBooks, color: 'red' },
-            { label: 'Genres', value: stats.totalGenres, color: 'purple' },
+            { label: "Total Books", value: stats.totalBooks, color: "indigo" },
+            { label: "Available", value: stats.availableBooks, color: "green" },
+            {
+              label: "Unavailable",
+              value: stats.unavailableBooks,
+              color: "red",
+            },
+            { label: "Genres", value: stats.totalGenres, color: "purple" },
           ].map((item, idx) => (
             <div key={idx} className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">{item.label}</p>
-                  <p className={`text-3xl font-bold text-${item.color}-600 mt-2`}>
+                  <p className="text-sm font-medium text-gray-600">
+                    {item.label}
+                  </p>
+                  <p
+                    className={`text-3xl font-bold text-${item.color}-600 mt-2`}
+                  >
                     {item.value}
                   </p>
                 </div>
@@ -124,21 +137,21 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-lg shadow mb-8">
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
-              {['overview', 'books', 'add'].map(tab => (
+              {["overview", "books", "add"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
                     activeTab === tab
-                      ? 'border-indigo-600 text-indigo-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? "border-indigo-600 text-indigo-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   }`}
                 >
-                  {tab === 'overview'
-                    ? 'Overview'
-                    : tab === 'books'
-                    ? 'All Books'
-                    : 'Add New Book'}
+                  {tab === "overview"
+                    ? "Overview"
+                    : tab === "books"
+                      ? "All Books"
+                      : "Add New Book"}
                 </button>
               ))}
             </nav>
@@ -147,18 +160,24 @@ export default function AdminDashboard() {
           {/* Tab Content */}
           <div className="p-6">
             {/* Overview */}
-            {activeTab === 'overview' && (
+            {activeTab === "overview" && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Activity</h2>
-                <p className="text-gray-600">Recent updates will appear here.</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  Recent Activity
+                </h2>
+                <p className="text-gray-600">
+                  Recent updates will appear here.
+                </p>
               </div>
             )}
 
             {/* Books */}
-            {activeTab === 'books' && (
+            {activeTab === "books" && (
               <div>
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">All Books</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    All Books
+                  </h2>
                   <div className="relative">
                     <input
                       type="text"
@@ -187,20 +206,36 @@ export default function AdminDashboard() {
                   <table className="w-full">
                     <thead className="bg-gray-50 border-b border-gray-200">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Author</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Genre</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date Added</th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Title
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Author
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Genre
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Status
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Date Added
+                        </th>
+                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+                          Actions
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {filteredBooks.length > 0 ? (
                         filteredBooks.map((book) => (
                           <tr key={book._id} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{book.title}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{book.author}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              {book.title}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                              {book.author}
+                            </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm">
                               <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">
                                 {book.genre}
@@ -210,11 +245,11 @@ export default function AdminDashboard() {
                               <span
                                 className={`px-2 py-1 text-xs font-medium rounded-full ${
                                   book.isAvailable
-                                    ? 'bg-green-100 text-green-800'
-                                    : 'bg-red-100 text-red-800'
+                                    ? "bg-green-100 text-green-800"
+                                    : "bg-red-100 text-red-800"
                                 }`}
                               >
-                                {book.isAvailable ? 'Available' : 'Unavailable'}
+                                {book.isAvailable ? "Available" : "Unavailable"}
                               </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
@@ -238,7 +273,10 @@ export default function AdminDashboard() {
                         ))
                       ) : (
                         <tr>
-                          <td colSpan="6" className="text-center py-6 text-gray-500">
+                          <td
+                            colSpan="6"
+                            className="text-center py-6 text-gray-500"
+                          >
                             No books found.
                           </td>
                         </tr>
@@ -250,9 +288,11 @@ export default function AdminDashboard() {
             )}
 
             {/* Add Book */}
-            {activeTab === 'add' && (
+            {activeTab === "add" && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Add New Book</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  Add New Book
+                </h2>
                 <p className="text-gray-600 mb-4">
                   Use the form below to add new books to your collection.
                 </p>
